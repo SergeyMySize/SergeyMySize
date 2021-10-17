@@ -1,0 +1,194 @@
+<div class='wrapper'>
+  <%= image_tag('mysize_tesla.svg') %>
+
+  <h2 class="header">Find your best uniform fit</h2>
+  <div class="input-wrapper">
+    <label style="align-self: flex-start; margin-left: 30px" class="text-label">Email</label>
+    <input type="text" class="text-input">
+  </div>
+  <div class="input-wrapper">
+    <div class="row-flex">
+      <label class="text-label">Height</label>
+      <div class="measurement-system-div">
+        <p class="measurement-system-button metric">cm</p>
+        <p class="measurement-system-button imperial active">in</p>
+      </div>
+    </div>
+    <input type="text" class="text-input">
+  </div>
+  <div class="input-wrapper">
+    <div class="row-flex">
+      <label class="text-label">Weight</label>
+      <div class="measurement-system-div">
+        <p class="measurement-system-button metric">kg</p>
+        <p class="measurement-system-button imperial active">lbs</p>
+      </div>
+    </div>
+    <input type="text" class="text-input">
+  </div>
+  <div class="input-wrapper">
+    <div class="row-flex">
+      <label class="text-label">Gender</label>
+    </div>
+    <div class="gender-section">
+      <div id="male" class="gender-button">Male</div>
+      <div id="female" class="gender-button">Female</div>
+    </div>
+  </div>
+
+  <div class="female-section">
+    <div class="input-wrapper">
+      <div class="row-flex">
+        <label class="text-label">Bra Size</label>
+      </div>
+      <div class="gender-section">
+        <div class="select-section">
+          <select class="select-input" id="bra-type-select">
+            <option>UK</option>
+            <option>EU</option>
+          </select>
+        </div>
+        <div class="select-section">
+          <select class="select-input" id="cup-select"></select>
+        </div>
+        <div class="select-section">
+          <select class="select-input" id="band-select"></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="female-fullest-section">
+      <p>Select the fullest part of your body</p>
+      <div>
+        <input type="radio" name="female-type" value="chest"
+               checked>
+        <label for="">Chest</label>
+      </div>
+      <div>
+        <input type="radio" name="female-type" value="waist"
+        >
+        <label for="">Waist</label>
+      </div>
+
+      <div>
+        <input type="radio" name="female-type" value="hips">
+        <label for="">Hips</label>
+      </div>
+
+      <div>
+        <input type="radio" name="female-type" value="symmetrical">
+        <label for="">Symmetrical (Unsure)</label>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="male-fullest-section">
+    <p>Select the widest part of your body</p>
+    <div>
+      <input type="radio" name="male-type" value="shoulders"
+             checked>
+      <label for="">Shoulders</label>
+    </div>
+    <div>
+      <input type="radio" name="male-type" value="Waist"
+      >
+      <label for="">Waist (Stomach)</label>
+    </div>
+
+    <div>
+      <input type="radio" name="male-type" value="symmetrical">
+      <label for="">Symmetrical (Unsure)</label>
+    </div>
+
+  </div>
+
+
+  <div class="next-btn">Next</div>
+
+
+</div>
+
+
+
+
+
+<script>
+    window.onload = () => {
+        let measurementSystemButtons = document.querySelectorAll('.measurement-system-button');
+        measurementSystemButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                let mtrButtons = document.querySelectorAll('.metric')
+                let impButtons = document.querySelectorAll('.imperial')
+                if (e.target.classList.contains('metric')) {
+                    mtrButtons.forEach(mtr => {
+                        mtr.classList.add('active');
+                    });
+                    impButtons.forEach(mtr => {
+                        mtr.classList.remove('active');
+                    });
+                } else {
+                    mtrButtons.forEach(mtr => {
+                        mtr.classList.remove('active');
+                    });
+                    impButtons.forEach(mtr => {
+                        mtr.classList.add('active');
+                    });
+                }
+            })
+        });
+
+        document.querySelectorAll('.gender-button').forEach(genderBtn => {
+            let male = document.getElementById('male');
+            let female = document.getElementById('female');
+            let femaleSection = document.querySelector('.female-section');
+            let maleSection = document.querySelector('.male-fullest-section');
+            let chooseFemaleSection = document.querySelector('.female-fullest-section')
+            genderBtn.addEventListener('click', (e) => {
+                if (e.target.id === 'male') {
+                    male.classList.add('active-gender');
+                    female.classList.remove('active-gender');
+                    femaleSection.style.display = 'none';
+                    maleSection.style.display = 'flex';
+                    chooseFemaleSection.style.display = 'none';
+
+                } else {
+                    femaleSection.style.display = 'block';
+                    maleSection.style.display = 'none';
+                    chooseFemaleSection.style.display = 'flex';
+                    male.classList.remove('active-gender');
+                    female.classList.add('active-gender')
+                }
+            });
+        });
+
+        const handleTypeSelect = (e) => {
+            let cupArr = []
+            let bandArr = []
+            if (e.target.value == 'UK') {
+                cupArr = ['AA', 'A', 'B', 'C', 'D', 'DD', 'E', 'F', 'FF', 'G', 'GG', 'H', 'HH', 'J', 'JJ', 'K'];
+                bandArr = ['30', '32', '34', '36', '38', '40', '42', '44', '46', '48'];
+            } else {
+                cupArr = ['AA', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
+                bandArr = ['65', '70', '75', '80', '85', '90', '95', '100', '105', '110'];
+            }
+            cupArr.forEach((cup, index) => {
+                cupSelect = document.getElementById('cup-select');
+                cupSelect.options[index] = new Option(cup, cup);
+            });
+
+            bandArr.forEach((band, index) => {
+                bandSelect = document.getElementById('band-select');
+                bandSelect.options[index] = new Option(band, band);
+            });
+
+        }
+
+
+        document.querySelector('#bra-type-select').addEventListener('change', handleTypeSelect)
+
+        // daySelect = document.getElementById('bra-type-select');
+        // daySelect.options[daySelect.options.length] = new Option('Text 1', 'Value1');
+
+    }
+</script>
