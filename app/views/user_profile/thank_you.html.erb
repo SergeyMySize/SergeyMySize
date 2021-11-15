@@ -1,0 +1,21 @@
+<div class='wrapper'>
+  <div class="main-page">
+    <div class="img-header">
+      <%= image_tag('mysize_tesla.svg') %>
+    </div>
+    <div class="thank-you-section">
+      <%= image_tag('v-icon.png', style: "width: 36px") %>
+      <p class="thank-you-header">Thank you!</p>
+      <div class="done-btnn">START OVER</div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+
+    document.querySelector('.done-btnn').addEventListener('click', () => {
+        window.location = "<%= ENV['TESLA_BACKEND_URL'] %>"
+    })
+</script>

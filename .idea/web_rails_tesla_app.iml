@@ -34,6 +34,7 @@
     <orderEntry type="library" scope="PROVIDED" name="arbre (v1.4.0, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="archive-zip (v0.12.0, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v9.0.0, rbenv: 2.5.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.16, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bindex (v0.8.1, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.9.1, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, rbenv: 2.5.6) [gem]" level="application" />
@@ -47,6 +48,9 @@
     <orderEntry type="library" scope="PROVIDED" name="coffee-script-source (v1.12.2, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.1.9, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, rbenv: 2.5.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="devise (v4.7.1, rbenv: 2.5.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="dotenv (v2.5.0, rbenv: 2.5.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="dotenv-rails (v2.5.0, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.10.0, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="execjs (v2.8.1, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.15.4, rbenv: 2.5.6) [gem]" level="application" />
@@ -54,6 +58,7 @@
     <orderEntry type="library" scope="PROVIDED" name="formtastic_i18n (v0.7.0, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.5.2, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="has_scope (v0.8.0, rbenv: 2.5.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="httparty (v0.16.3, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.8.10, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="inherited_resources (v1.13.0, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="io-like (v0.3.1, rbenv: 2.5.6) [gem]" level="application" />
@@ -68,11 +73,15 @@
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.7.1, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="marcel (v1.0.2, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="method_source (v1.0.0, rbenv: 2.5.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mime-types (v3.3.1, rbenv: 2.5.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mime-types-data (v3.2021.0225, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.1.2, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.14.4, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.4.2, rbenv: 2.5.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="multi_xml (v0.6.0, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nio4r (v2.5.8, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.12.5, rbenv: 2.5.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="orm_adapter (v0.5.0, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pg (v1.2.3, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="public_suffix (v4.0.6, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v3.12.6, rbenv: 2.5.6) [gem]" level="application" />
@@ -108,6 +117,7 @@
     <orderEntry type="library" scope="PROVIDED" name="turbolinks-source (v5.2.0, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v1.2.9, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="uglifier (v4.2.0, rbenv: 2.5.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="warden (v1.2.8, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v3.7.0, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.7.5, rbenv: 2.5.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-extensions (v0.1.5, rbenv: 2.5.6) [gem]" level="application" />

@@ -10,19 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_14_073817) do
+ActiveRecord::Schema.define(version: 2021_11_09_113341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "admin_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "title"
+    t.string "logo"
+    t.string "size_chart_code"
+    t.string "gender"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "index"
+  end
+
   create_table "user_profiles", force: :cascade do |t|
-    t.string "name"
     t.string "email"
     t.float "height"
     t.float "weight"
     t.string "gender"
     t.string "bra_size"
-    t.string "fullest_part"
+    t.string "measurement_system"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "user_results"
+    t.text "user_feedback"
+    t.text "other_feedback"
+    t.float "original_height"
+    t.float "original_weight"
+    t.string "belly_shape"
+    t.string "hip_shape"
   end
 
 end

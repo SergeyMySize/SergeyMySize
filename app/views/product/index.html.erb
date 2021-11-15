@@ -1,0 +1,75 @@
+<div class='wrapper'>
+  <div class="main-page">
+    <div class="img-header">
+      <%= image_tag('mysize_tesla.svg') %>
+    </div>
+
+    <div class="product">
+      <div class="header-wrapper">
+        <h1 class="uniform-header">Hey, your uniform sizes are:</h1>
+      </div>
+      <div class="content-section"></div>
+      <textarea id="textareaID" placeholder="Other feedback…"></textarea>
+      <div class="done-btn">SUBMIT FORM</div>
+    </div>
+  </div>
+  <%= image_tag('tesla-bg.png') %>
+
+</div>
+
+
+<script>
+    window.onload = () => {
+        let contentSection = document.querySelector('.content-section');
+        let productStringTag = ``;
+        <% @product_res.each_with_index{|product,index| %>
+        productStringTag += `
+            <div class="content-section">
+                <div class="product-wrapper">
+                    <img class="product-image" src="<%= product[:logo] %>"/>
+                    <div class="title-and-size-wrapper">
+                        <p class="title-para"><%=product[:title] %></p>
+                        <p class="title-para" style="color: #3d69e1;font-weight: bold; margin: 0"><%= product[:size] === nil ? '-' : product[:size] %></p>
+                        <p class='how-did-your'>How did this garment fit?</p>
+                        <div class='check-box-wrapper'>
+                          <% ['Didn’t try it on', 'Perfect', 'Tight', 'Loose'].each{|btn| %>
+                        <div class='radio-wrapper'>
+                          <input type="radio" id="<%= index.to_s + btn %>" name="<%=index %>" value="<%= btn %>" <%=btn == 'Didn’t try it on' ? 'checked' : '' %>>
+                          <label class='product-radio-btn' for="<%= index.to_s + btn %>"><%= btn %></label>
+                        </div>
+                          <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+        <%}%>
+
+        contentSection.innerHTML = productStringTag;
+
+
+        document.querySelector('.done-btn').addEventListener('click', () => {
+            let userResults = [];
+            <% @product_res.each_with_index{|product,index| %>
+            var braRadioBtn = document.querySelector('input[name="<%=index%>"]:checked').value;
+            userResults.push({
+                size_chart_name: "<%=product[:title]%>",
+                size: "<%= product[:size] === nil ? '-' : product[:size]%>",
+                garment_fit: braRadioBtn
+            });
+            <%}%>
+            let feedback = document.getElementById("textareaID").value
+
+            let data = {user_results: userResults, external_id: "<%= @external_id %>", feedback: feedback}
+            let userResultText = JSON.stringify(data);
+
+            fetch('/user_profile', {
+                headers: {
+                    'Content-Type': 'application/json'
+                }, method: 'post', body: userResultText
+            }).then(data => console.log(data));
+
+            window.location = "/thank_you"
+        });
+
+    }
+</script>

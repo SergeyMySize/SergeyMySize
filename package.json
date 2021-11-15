@@ -1,5 +1,7 @@
 {
   "name": "web_rails_tesla_app",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "yarn": "^1.22.17"
+  }
 }

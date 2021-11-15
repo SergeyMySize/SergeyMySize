@@ -1,112 +1,214 @@
+<script>
+    function changeCupSelect(selectObject) {
+        let braBandselectTag = document.getElementById('band-select');
+        selectObject.style.border = 'unset'
+        braBandselectTag.style.border = 'unset'
+        document.querySelector('#bra-error').style.visibility = 'hidden';
+        let braCupselectTag = document.getElementById('cup-select');
+        let selectedBraCup = braCupselectTag.options[braCupselectTag.selectedIndex].value;
+        if (selectedBraCup === 'Don\'t Know') {
+            document.getElementById('band-select').getElementsByTagName('option')[11].selected = 'selected';
+        }
+    }
+
+    function changeBandSelect(selectObject) {
+        let braCupselectTag = document.getElementById('cup-select');
+        selectObject.style.border = 'unset'
+        braCupselectTag.style.border = 'unset'
+        document.querySelector('#bra-error').style.visibility = 'hidden';
+        let braBandselectTag = document.getElementById('band-select');
+        let selectedBraBand = braBandselectTag.options[braBandselectTag.selectedIndex].value;
+        if (selectedBraBand === 'Don\'t Know') {
+            document.getElementById('cup-select').getElementsByTagName('option')[17].selected = 'selected';
+        }
+    }
+</script>
+
 <div class='wrapper'>
-  <%= image_tag('mysize_tesla.svg') %>
+  <div class="main-page">
+    <div class="img-header">
+      <%= image_tag('mysize_tesla.svg') %>
+    </div>
+    <div class="form-section">
 
-  <h2 class="header">Find your best uniform fit</h2>
-  <div class="input-wrapper">
-    <label style="align-self: flex-start; margin-left: 30px" class="text-label">Email</label>
-    <input type="text" class="text-input">
-  </div>
-  <div class="input-wrapper">
-    <div class="row-flex">
-      <label class="text-label">Height</label>
-      <div class="measurement-system-div">
-        <p class="measurement-system-button metric">cm</p>
-        <p class="measurement-system-button imperial active">in</p>
-      </div>
-    </div>
-    <input type="text" class="text-input">
-  </div>
-  <div class="input-wrapper">
-    <div class="row-flex">
-      <label class="text-label">Weight</label>
-      <div class="measurement-system-div">
-        <p class="measurement-system-button metric">kg</p>
-        <p class="measurement-system-button imperial active">lbs</p>
-      </div>
-    </div>
-    <input type="text" class="text-input">
-  </div>
-  <div class="input-wrapper">
-    <div class="row-flex">
-      <label class="text-label">Gender</label>
-    </div>
-    <div class="gender-section">
-      <div id="male" class="gender-button">Male</div>
-      <div id="female" class="gender-button">Female</div>
-    </div>
-  </div>
-
-  <div class="female-section">
-    <div class="input-wrapper">
-      <div class="row-flex">
-        <label class="text-label">Bra Size</label>
-      </div>
-      <div class="gender-section">
-        <div class="select-section">
-          <select class="select-input" id="bra-type-select">
-            <option>UK</option>
-            <option>EU</option>
-          </select>
+      <h2 class="header">Find your best uniform fit</h2>
+      <form name="myForm" onsubmit="return false">
+        <div class="input-wrapper">
+          <label style="align-self: flex-start; margin-left: 30px" class="text-label">Email</label>
+          <input type="text" class="text-input email">
+          <p id="email-error" class="email-error" style="visibility: hidden">Please enter a valid email address</p>
         </div>
-        <div class="select-section">
-          <select class="select-input" id="cup-select"></select>
+        <div class="input-wrapper">
+          <div class="row-flex">
+            <label class="text-label">Height</label>
+            <div class="measurement-system-div">
+              <div class="measurement-system-button imperial active">in</div>
+              <div class="measurement-system-button metric">cm</div>
+            </div>
+          </div>
+          <div style="display: none" id="height-metric">
+            <input id="height-met" type="number" class="text-input height">
+          </div>
+          <div id="height-imperial" style="width: 335px">
+            <input placeholder="Feet" style="width: 49%" type="number" class="text-input feet">
+            <input placeholder="Inches" style="width: 49%" type="number" class="text-input inch">
+          </div>
+          <p id="height-imp-error" class="email-error" style="visibility: hidden">Please enter height</p>
         </div>
-        <div class="select-section">
-          <select class="select-input" id="band-select"></select>
+        <div class="input-wrapper">
+          <div class="row-flex">
+            <label class="text-label">Weight</label>
+            <div class="measurement-system-div">
+              <div class="measurement-system-button imperial active">lbs</div>
+              <div class="measurement-system-button metric">kg</div>
+            </div>
+          </div>
+          <input type="number" class="text-input weight">
+          <p id="weight-error" class="email-error" style="visibility: hidden">Please enter weight</p>
         </div>
-      </div>
-    </div>
+        <div class="input-wrapper">
+          <div class="row-flex">
+            <label class="text-label">Gender</label>
+          </div>
+          <div class="gender-section">
+            <div id="male" class="gender-button">Male</div>
+            <div id="female" class="gender-button">Female</div>
+          </div>
+          <p id="gender-error" class="email-error" style="visibility: hidden">Please select gender</p>
+        </div>
 
-    <div class="female-fullest-section">
-      <p>Select the fullest part of your body</p>
-      <div>
-        <input type="radio" name="female-type" value="chest"
-               checked>
-        <label for="">Chest</label>
-      </div>
-      <div>
-        <input type="radio" name="female-type" value="waist"
-        >
-        <label for="">Waist</label>
-      </div>
+        <div class="female-section">
 
-      <div>
-        <input type="radio" name="female-type" value="hips">
-        <label for="">Hips</label>
-      </div>
+          <div style="width:335px; margin: 0 auto">
+            <p style="margin-bottom: 0;padding-bottom: 10px;width: 200px;margin-left: 24px" class="text-label">Do you
+              know your bra size?</p>
+            <div style="margin-left: 24px;margin-bottom: 14px">
+              <input type="radio" id="not-sure" name="brabra" value="0"
+                     checked>
+              <label class="label-bra" for="not-sure">Not sure</label>
+            </div>
+            <div style="margin-left: 24px;margin-bottom: 20px">
+              <input type="radio" id="yes" name="brabra" value="1"
+              >
+              <label class="label-bra" for="yes">Yes</label>
+            </div>
+          </div>
 
-      <div>
-        <input type="radio" name="female-type" value="symmetrical">
-        <label for="">Symmetrical (Unsure)</label>
-      </div>
+          <div id="bra-select-tag" class="input-wrapper" style="margin-bottom: 6px; display: none">
+            <div class="row-flex">
+              <label class="text-label">Bra Size</label>
+              <div style="width: 44px" class="measurement-system-div">
+                <p class="bra-region us active">us</p>
+                <p class="bra-region eu">eu</p>
+              </div>
+            </div>
 
+            <div class="gender-section">
+              <div class="select-section">
+                <select class="select-input" id="band-select" onchange="changeBandSelect(this)">
+                  <option disabled selected>Band</option>
+                  <option>30</option>
+                  <option>32</option>
+                  <option>34</option>
+                  <option>36</option>
+                  <option>38</option>
+                  <option>40</option>
+                  <option>42</option>
+                  <option>44</option>
+                  <option>46</option>
+                  <option>48</option>
+                </select>
+              </div>
+              <div class="select-section">
+                <select class="select-input" id="cup-select" onchange="changeCupSelect(this)">
+                  <option disabled selected>Cup</option>
+                  <option>AA</option>
+                  <option>A</option>
+                  <option>B</option>
+                  <option>C</option>
+                  <option>D</option>
+                  <option>DD</option>
+                  <option>DDD</option>
+                  <option>G</option>
+                  <option>H</option>
+                  <option>I</option>
+                  <option>J</option>
+                  <option>K</option>
+                  <option>L</option>
+                  <option>M</option>
+                  <option>N</option>
+                  <option>O</option>
+                </select>
+              </div>
+            </div>
+            <div id="bra-error" class="email-error">Please select bra size</div>
+          </div>
+          <div style="width:335px; margin: 0 auto">
+            <p style="margin-left: 28px" class="text-label">Select your belly shape</p>
+          </div>
+          <div class="female-belly-shape">
+            <div id="female-flatter" class="button-pic-female">
+              <%= image_tag('female-flatter.png', class: "female-belly-image") %>
+              <p id="female-flatter-p" class="female-belly-p">Flatter</p>
+            </div>
+            <div id="female-average" class="button-pic-female">
+              <%= image_tag("female-average.png", class: "female-belly-image") %>
+              <p id="female-average-p" class="female-belly-p">Average</p>
+            </div>
+            <div id="female-rounder" class="button-pic-female">
+              <%= image_tag('female-rounder.png', class: "female-belly-image") %>
+              <p id="female-rounder-p" class="female-belly-p">Rounder</p>
+            </div>
+          </div>
+
+          <div style="width:335px; margin: 0 auto">
+            <p style="margin-left: 28px" class="text-label">Select your hip shape</p>
+          </div>
+          <div class="female-shape">
+            <div id="female-shape-regular" class="button-pic-shape-female">
+              <%= image_tag('female-regular.png', class: "shape-image") %>
+              <p id="female-regular-p" class="shape-p">Average</p>
+            </div>
+            <div id="female-shape-curvey" class="button-pic-shape-female">
+              <%= image_tag('female-curvey.png', class: "shape-image") %>
+              <p id="female-curvey-p" class="shape-p">Rounder</p>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="male-section">
+
+
+          <div style="width:335px; margin: 0 auto">
+            <p style="margin-top:0;margin-left: 28px" class="text-label">Select your belly shape</p>
+          </div>
+          <div class="male-belly-shape">
+            <div id="male-flatter" class="button-pic-male">
+              <%= image_tag('male-flatter.png', class: "male-belly-image") %>
+              <p id="male-flatter-p" class="male-belly-p">Flatter</p>
+            </div>
+            <div id="male-average" class="button-pic-male">
+              <%= image_tag("male-average.png", class: "male-belly-image") %>
+              <p id="male-average-p" class="male-belly-p">Average</p>
+            </div>
+            <div id="male-rounder" class="button-pic-male">
+              <%= image_tag('male-rounder.png', class: "male-belly-image") %>
+              <p id="male-rounder-p" class="male-belly-p">Rounder</p>
+            </div>
+          </div>
+
+        </div>
+        <button type="submit" class="next-btn">NEXT</button>
+      </form>
     </div>
   </div>
+  <div class="loeader-section hide">
 
-  <div class="male-fullest-section">
-    <p>Select the widest part of your body</p>
-    <div>
-      <input type="radio" name="male-type" value="shoulders"
-             checked>
-      <label for="">Shoulders</label>
-    </div>
-    <div>
-      <input type="radio" name="male-type" value="Waist"
-      >
-      <label for="">Waist (Stomach)</label>
-    </div>
-
-    <div>
-      <input type="radio" name="male-type" value="symmetrical">
-      <label for="">Symmetrical (Unsure)</label>
-    </div>
-
+    <div style="" class="loader"></div>
+    <p>Calculating…</p>
   </div>
-
-
-  <div class="next-btn">Next</div>
-
-
+  <%= image_tag('tesla-bg.png') %>
 </div>
 
 
@@ -115,7 +217,285 @@
 
 <script>
     window.onload = () => {
+        let usCupArr = ['Cup', 'AA', 'A', 'B', 'C', 'D', 'DD', 'DDD', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
+        let euCupArr = ['Cup', 'AA', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
+        let usBandArr = ['Band', '30', '32', '34', '36', '38', '40', '42', '44', '46', '48'];
+        let euBandArr = ['Band', '65', '70', '75', '80', '85', '90', '95', '100', '105', '110'];
+        let cupIndexValue = null;
+        let bandValue = null;
+        let selectedBraType = null;
+        let email = null;
+        let height = null;
+        let weight = null;
+        let fullestPart = null;
+        let currentMeasurementSystem = "imperial";
+
+
+        document.querySelectorAll('.button-pic-male').forEach(tag => {
+            let maleFlatter = document.getElementById('male-flatter');
+            let maleAverage = document.getElementById('male-average');
+            let maleRounder = document.getElementById('male-rounder');
+
+            tag.addEventListener('click', (e) => {
+                if (tag.id === 'male-flatter') {
+                    maleFlatter.children[0].classList.add('active-img');
+                    maleAverage.children[0].classList.remove('active-img');
+                    maleRounder.children[0].classList.remove('active-img');
+                    maleFlatter.children[1].classList.add('active-p');
+                    maleAverage.children[1].classList.remove('active-p');
+                    maleRounder.children[1].classList.remove('active-p');
+                }
+                if (tag.id === 'male-average') {
+                    maleFlatter.children[0].classList.remove('active-img');
+                    maleAverage.children[0].classList.add('active-img');
+                    maleRounder.children[0].classList.remove('active-img');
+                    maleFlatter.children[1].classList.remove('active-p');
+                    maleAverage.children[1].classList.add('active-p');
+                    maleRounder.children[1].classList.remove('active-p');
+
+                }
+                if (tag.id === 'male-rounder') {
+                    maleFlatter.children[0].classList.remove('active-img');
+                    maleAverage.children[0].classList.remove('active-img');
+                    maleRounder.children[0].classList.add('active-img');
+                    maleFlatter.children[1].classList.remove('active-p');
+                    maleAverage.children[1].classList.remove('active-p');
+                    maleRounder.children[1].classList.add('active-p');
+                }
+
+                document.querySelectorAll('.male-belly-image').forEach(tag => {
+                    tag.classList.remove('pic-error');
+                });
+
+                document.querySelectorAll('.male-belly-p').forEach(tag => {
+                    tag.classList.remove('p-error');
+                });
+
+            })
+
+        });
+
+
+        document.querySelectorAll('.button-pic-female').forEach(tag => {
+            let femaleFlatter = document.getElementById('female-flatter');
+            let femaleAverage = document.getElementById('female-average');
+            let femaleRounder = document.getElementById('female-rounder');
+
+            tag.addEventListener('click', (e) => {
+                if (tag.id === 'female-flatter') {
+                    femaleFlatter.children[0].classList.add('active-img');
+                    femaleAverage.children[0].classList.remove('active-img');
+                    femaleRounder.children[0].classList.remove('active-img');
+                    femaleFlatter.children[1].classList.add('active-p');
+                    femaleAverage.children[1].classList.remove('active-p');
+                    femaleRounder.children[1].classList.remove('active-p');
+                }
+                if (tag.id === 'female-average') {
+                    femaleFlatter.children[0].classList.remove('active-img');
+                    femaleAverage.children[0].classList.add('active-img');
+                    femaleRounder.children[0].classList.remove('active-img');
+                    femaleFlatter.children[1].classList.remove('active-p');
+                    femaleAverage.children[1].classList.add('active-p');
+                    femaleRounder.children[1].classList.remove('active-p');
+
+                }
+                if (tag.id === 'female-rounder') {
+                    femaleFlatter.children[0].classList.remove('active-img');
+                    femaleAverage.children[0].classList.remove('active-img');
+                    femaleRounder.children[0].classList.add('active-img');
+                    femaleFlatter.children[1].classList.remove('active-p');
+                    femaleAverage.children[1].classList.remove('active-p');
+                    femaleRounder.children[1].classList.add('active-p');
+                }
+
+                document.querySelectorAll('.female-belly-image').forEach(tag => {
+                    tag.classList.remove('pic-error');
+                });
+
+                document.querySelectorAll('.female-belly-p').forEach(tag => {
+                    tag.classList.remove('p-error');
+                });
+
+
+            });
+        });
+
+
+        document.querySelectorAll('.button-pic-shape-female').forEach(tag => {
+            let femaleRegular = document.getElementById('female-shape-regular');
+            let femaleCurvey = document.getElementById('female-shape-curvey');
+
+            tag.addEventListener('click', (e) => {
+                if (tag.id === 'female-shape-regular') {
+                    femaleRegular.children[0].classList.add('active-img');
+                    femaleCurvey.children[0].classList.remove('active-img');
+                    femaleRegular.children[1].classList.add('active-p');
+                    femaleCurvey.children[1].classList.remove('active-p');
+                }
+                if (tag.id === 'female-shape-curvey') {
+                    femaleRegular.children[0].classList.remove('active-img');
+                    femaleCurvey.children[0].classList.add('active-img');
+                    femaleRegular.children[1].classList.remove('active-p');
+                    femaleCurvey.children[1].classList.add('active-p');
+                }
+                document.querySelectorAll('.shape-image').forEach(tag => {
+                    tag.classList.remove('pic-error');
+                });
+
+                document.querySelectorAll('.shape-p').forEach(tag => {
+                    tag.classList.remove('p-error');
+                });
+            });
+        });
+
+
+        document.getElementById('not-sure').addEventListener('change', (e) => {
+            document.getElementById('bra-select-tag').style.display = 'none';
+
+        });
+        document.getElementById('yes').addEventListener('change', (e) => {
+            document.getElementById('bra-select-tag').style.display = 'flex';
+
+        });
+
+
+        document.querySelector('.feet').addEventListener('input', (e) => {
+            document.querySelector('.feet').style.border = 'unset';
+            document.querySelector('.inch').style.border = 'unset';
+            document.querySelector('.height').style.border = 'unset';
+            document.querySelector('#height-imp-error').style.visibility = 'hidden';
+            e.target.value = e.target.value.replace("-", "")
+            if (e.target.value == 0) {
+                e.target.value = ""
+            }
+            if (parseInt(e.target.value) > 7) {
+                e.target.value = "7"
+            }
+        });
+        document.querySelector('.inch').addEventListener('input', (e) => {
+            document.querySelector('.feet').style.border = 'unset';
+            document.querySelector('.inch').style.border = 'unset';
+            document.querySelector('.height').style.border = 'unset';
+            document.querySelector('#height-imp-error').style.visibility = 'hidden';
+            e.target.value = e.target.value.replace("-", "")
+            // if (e.target.value == 0) {
+            //     e.target.value = ""
+            // }
+            if (parseInt(e.target.value) > 12) {
+                e.target.value = "12"
+            }
+
+            let bla = parseInt(e.target.value.replace("-", ""));
+            e.target.value = bla
+        });
+
+        document.querySelector('.height').addEventListener('input', (e) => {
+            document.querySelector('.height').style.border = 'unset';
+            document.querySelector('.feet').style.border = 'unset';
+            document.querySelector('.inch').style.border = 'unset';
+            document.querySelector('#height-imp-error').style.visibility = 'hidden';
+            e.target.value = e.target.value.replace("-", "")
+            if (e.target.value == 0) {
+                e.target.value = ""
+            }
+            if (parseInt(e.target.value) > 220) {
+                e.target.value = "220"
+            }
+
+        });
+
+
+        document.querySelector('.weight').addEventListener('input', (e) => {
+            document.querySelector('#weight-error').style.visibility = 'hidden'
+            document.querySelector('.weight').style.border = 'unset'
+            let measurementSystemInput = null
+            document.querySelectorAll('.measurement-system-button').forEach(tag => {
+                if (tag.classList.contains('imperial') && tag.classList.contains('active')) {
+                    measurementSystemInput = 'imperial';
+                } else if (tag.classList.contains('metric') && tag.classList.contains('active')) {
+                    measurementSystemInput = 'metric';
+                }
+            });
+
+
+            e.target.value = e.target.value.replace("-", "")
+            if (e.target.value == 0) {
+                e.target.value = ""
+            }
+            if (parseInt(e.target.value) > 200 && measurementSystemInput === 'metric') {
+                e.target.value = "200"
+            }
+            if (parseInt(e.target.value) > 440 && measurementSystemInput === 'imperial') {
+                e.target.value = "440"
+            }
+
+        });
+
+        function validateEmail(email) {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        document.querySelectorAll('.bra-region').forEach(braReg => {
+            let euInput = document.querySelector('.eu');
+            let usInput = document.querySelector('.us');
+            braReg.addEventListener('click', (reg) => {
+                if (reg.target.classList.contains('eu')) {
+                    euInput.classList.add('active');
+                    usInput.classList.remove('active');
+                } else {
+                    usInput.classList.add('active');
+                    euInput.classList.remove('active');
+                }
+            });
+        });
+
+
+        document.querySelector('.email').addEventListener('input', () => {
+            document.querySelector('.email-error').style.visibility = 'hidden';
+            document.querySelector('.email').style.border = 'unset';
+        });
+
+
+        convertUnits = (toUnit) => {
+            if (currentMeasurementSystem === toUnit) return;
+            let imperialSection = document.getElementById('height-imperial')
+            let metricSection = document.getElementById('height-metric');
+            let weightInput = document.querySelector('.weight');
+            if (toUnit === 'metric') {
+                let imperialWeight = weightInput.value;
+                let metricWeight = weightInput.value == 0 ? "" : Math.round(imperialWeight * 0.45359)
+                weightInput.value = metricWeight;
+                let feetInput = document.querySelector('.feet').value
+                let inchInput = document.querySelector('.inch').value
+                let metricInput = document.querySelector('.height');
+                let toMetric = parseInt(feetInput) * 30.48 + parseInt(inchInput) * 2.54;
+                metricInput.value = Math.round(toMetric);
+                imperialSection.style.display = 'none';
+                metricSection.style.display = 'block';
+                currentMeasurementSystem = toUnit;
+            } else {
+                let metricWeight = weightInput.value;
+                let imperialWeight = metricWeight / 0.45359;
+                weightInput.value = weightInput.value == 0 ? "" : Math.round(imperialWeight);
+                let feetInput = document.querySelector('.feet')
+                let inchInput = document.querySelector('.inch')
+                let metricInput = document.querySelector('.height').value;
+                let oldFeet = parseFloat(parseFloat(metricInput) / 2.54);
+                let feet = Math.floor(oldFeet / 12)
+                let inch = Math.round(oldFeet - 12 * feet)
+                feetInput.value = feet
+                inchInput.value = inch
+                imperialSection.style.display = 'block';
+                metricSection.style.display = 'none';
+                currentMeasurementSystem = toUnit;
+            }
+        }
+
+
         let measurementSystemButtons = document.querySelectorAll('.measurement-system-button');
+        let euInput = document.querySelector('.eu');
+        let usInput = document.querySelector('.us');
         measurementSystemButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 let mtrButtons = document.querySelectorAll('.metric')
@@ -127,6 +507,11 @@
                     impButtons.forEach(mtr => {
                         mtr.classList.remove('active');
                     });
+                    convertUnits('metric')
+                    handleTypeSelect('eu');
+                    euInput.classList.add('active');
+                    usInput.classList.remove('active');
+
                 } else {
                     mtrButtons.forEach(mtr => {
                         mtr.classList.remove('active');
@@ -134,6 +519,10 @@
                     impButtons.forEach(mtr => {
                         mtr.classList.add('active');
                     });
+                    convertUnits('imperial')
+                    handleTypeSelect('us');
+                    euInput.classList.remove('active');
+                    usInput.classList.add('active');
                 }
             })
         });
@@ -142,53 +531,377 @@
             let male = document.getElementById('male');
             let female = document.getElementById('female');
             let femaleSection = document.querySelector('.female-section');
-            let maleSection = document.querySelector('.male-fullest-section');
-            let chooseFemaleSection = document.querySelector('.female-fullest-section')
+            let maleSection = document.querySelector('.male-section');
             genderBtn.addEventListener('click', (e) => {
                 if (e.target.id === 'male') {
                     male.classList.add('active-gender');
                     female.classList.remove('active-gender');
                     femaleSection.style.display = 'none';
-                    maleSection.style.display = 'flex';
-                    chooseFemaleSection.style.display = 'none';
-
+                    maleSection.style.display = 'block';
                 } else {
                     femaleSection.style.display = 'block';
                     maleSection.style.display = 'none';
-                    chooseFemaleSection.style.display = 'flex';
                     male.classList.remove('active-gender');
                     female.classList.add('active-gender')
                 }
+                male.classList.remove('error-gender');
+                female.classList.remove('error-gender');
+                document.querySelector('#gender-error').style.visibility = 'hidden';
             });
         });
 
-        const handleTypeSelect = (e) => {
+        const handleTypeSelect = (value) => {
             let cupArr = []
             let bandArr = []
-            if (e.target.value == 'UK') {
-                cupArr = ['AA', 'A', 'B', 'C', 'D', 'DD', 'E', 'F', 'FF', 'G', 'GG', 'H', 'HH', 'J', 'JJ', 'K'];
-                bandArr = ['30', '32', '34', '36', '38', '40', '42', '44', '46', '48'];
+            if (value == 'us') {
+                cupArr = [...usCupArr];
+                bandArr = [...usBandArr];
             } else {
-                cupArr = ['AA', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
-                bandArr = ['65', '70', '75', '80', '85', '90', '95', '100', '105', '110'];
+                cupArr = [...euCupArr];
+                bandArr = [...euBandArr];
             }
             cupArr.forEach((cup, index) => {
                 cupSelect = document.getElementById('cup-select');
                 cupSelect.options[index] = new Option(cup, cup);
+                cupSelect.options[0].disabled = true
+                cupSelect.options[0].selected = true
             });
 
             bandArr.forEach((band, index) => {
                 bandSelect = document.getElementById('band-select');
                 bandSelect.options[index] = new Option(band, band);
+                bandSelect.options[0].disabled = true;
+                bandSelect.options[0].selected = true;
             });
 
         }
 
+        // document.querySelector('#bra-type-select').addEventListener('change', handleTypeSelect)
 
-        document.querySelector('#bra-type-select').addEventListener('change', handleTypeSelect)
 
-        // daySelect = document.getElementById('bra-type-select');
-        // daySelect.options[daySelect.options.length] = new Option('Text 1', 'Value1');
+        document.querySelectorAll('.bra-region').forEach(braReg => {
+            braReg.addEventListener('click', (e) => {
+                handleTypeSelect(braReg.innerText);
+            });
+        });
+
+
+        document.querySelector('.next-btn').addEventListener('click', (e) => {
+            /////////////////////////////////////////GET MEASUREMENT SYSTEM/////////////////////////////////////////////////
+            let toReturn = false;
+            let measurementSystem = 'metric';
+            let selectedBraCup = null;
+            let selectedBraBand = null;
+            let femaleBellyShape = null;
+            let femaleHipShape = null;
+            let maleBellyShape = null;
+            let originalHeight = null;
+            let originalWeight = null;
+
+
+            document.querySelectorAll('.measurement-system-button').forEach(tag => {
+                if (tag.classList.contains('imperial') && tag.classList.contains('active')) {
+                    measurementSystem = 'imperial';
+                } else if (tag.classList.contains('metric') && tag.classList.contains('active')) {
+                    measurementSystem = 'metric';
+                }
+            });
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////GET GENDER //////////////////////////////////////////////////////////////////
+
+            let activeGender = null
+            let genderBtns = document.querySelectorAll('.gender-button');
+            genderBtns.forEach(genderTag => {
+                if (genderTag.classList.contains('active-gender') && genderTag.id === 'female') {
+                    activeGender = 'female';
+                } else if (genderTag.classList.contains('active-gender') && genderTag.id === 'male') {
+                    activeGender = 'male';
+                }
+            });
+            if (!activeGender) {
+                genderBtns.forEach(genderTag => {
+                    genderTag.classList.add('error-gender');
+                    document.querySelector('#gender-error').style.visibility = 'visible';
+                    toReturn = true;
+                });
+
+            }
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////GET EMAIL //////////////////////////////////////////////////////////////////
+            email = document.querySelector('.email').value
+
+            if (!validateEmail(email.trim())) {
+                document.querySelector('.email-error').style.visibility = 'visible';
+                document.querySelector('.email').style.border = '1px solid #b74134';
+                toReturn = true;
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////GET HEIGHT &  WEIGHT ////////////////////////////////////////////////////////
+            if (measurementSystem === 'imperial') {
+                let feet = document.querySelector('.feet').value;
+                let inch = document.querySelector('.inch').value;
+                weight = document.querySelector('.weight').value;
+
+                originalHeight = parseFloat(feet) * 12 + parseFloat(inch)
+                originalWeight = weight;
+
+                weight = document.querySelector('.weight').value;
+
+                if (weight == "") {
+                    document.querySelector('#weight-error').style.visibility = 'visible';
+                    document.querySelector('.weight').style.border = '1px solid #b74134';
+                    toReturn = true;
+                }
+                if (feet === "" || inch === "") {
+                    document.querySelector('#height-imp-error').style.visibility = 'visible';
+                    document.querySelector('.feet').style.border = '1px solid #b74134';
+                    document.querySelector('.inch').style.border = '1px solid #b74134';
+                    document.querySelector('.height').style.border = '1px solid #b74134';
+                    toReturn = true;
+                }
+                height = (parseFloat(feet) * 12 + parseFloat(inch)) * 2.54
+                weight = parseFloat(document.querySelector('.weight').value) * 0.45359237
+
+            } else {
+                height = document.querySelector('.height').value
+                weight = document.querySelector('.weight').value
+
+                originalHeight = height
+                originalWeight = weight
+
+                if (height === "") {
+                    document.querySelector('#height-imp-error').style.visibility = 'visible';
+                    document.querySelector('.height').style.border = '1px solid #b74134';
+                    document.querySelector('.feet').style.border = '1px solid #b74134';
+                    document.querySelector('.inch').style.border = '1px solid #b74134';
+                    toReturn = true;
+                }
+                if (weight == "") {
+                    document.querySelector('#weight-error').style.visibility = 'visible';
+                    document.querySelector('.weight').style.border = '1px solid #b74134';
+                    toReturn = true;
+                }
+            }
+
+
+            ///////////////////////////////////GET BRA SIZES AND FULLEST PART///////////// ////////////////////////////////////////////////////////
+            if (activeGender === 'female') {
+                let braCupselectTag = document.getElementById('cup-select');
+                let braBandselectTag = document.getElementById('band-select');
+                selectedBraCup = braCupselectTag.options[braCupselectTag.selectedIndex].value;
+                selectedBraBand = braBandselectTag.options[braBandselectTag.selectedIndex].value;
+
+                let allowBraSelect = document.querySelector('input[name="brabra"]:checked').value;
+                if(allowBraSelect !== '0'){
+                    if(selectedBraCup == 'Cup' || selectedBraBand === 'Band'){
+                        if(selectedBraCup == 'Cup'){
+                            braCupselectTag.style.border = '1px solid #b74134'
+                        }
+                        if(selectedBraBand == 'Band'){
+                            braBandselectTag.style.border = '1px solid #b74134'
+                        }
+                        document.querySelector('#bra-error').style.visibility = 'visible';
+                        toReturn = true;
+                    }
+                }
+
+                document.querySelectorAll('.bra-region').forEach(braReg => {
+                    if (braReg.classList.contains('active')) {
+                        selectedBraType = braReg.innerText;
+                    }
+                });
+
+
+                if (document.getElementById('female-flatter-p').classList.contains('active-p')) {
+                    femaleBellyShape = 1;
+                } else if (document.getElementById('female-average-p').classList.contains('active-p')) {
+                    femaleBellyShape = 2;
+                } else if (document.getElementById('female-rounder-p').classList.contains('active-p')) {
+                    femaleBellyShape = 3;
+                } else {
+                    document.querySelectorAll('.female-belly-image').forEach(tag => {
+                        tag.classList.add('pic-error');
+                    });
+
+                    document.querySelectorAll('.female-belly-p').forEach(tag => {
+                        tag.classList.add('p-error');
+                    });
+                    toReturn = true;
+                }
+
+                if (document.getElementById('female-regular-p').classList.contains('active-p')) {
+                    femaleHipShape = 1;
+                } else if (document.getElementById('female-curvey-p').classList.contains('active-p')) {
+                    femaleHipShape = 2;
+
+                } else {
+
+                    document.querySelectorAll('.shape-image').forEach(tag => {
+                        tag.classList.add('pic-error');
+                    });
+
+                    document.querySelectorAll('.shape-p').forEach(tag => {
+                        tag.classList.add('p-error');
+                    });
+                    toReturn = true;
+                }
+
+
+                if (selectedBraType === 'us') {
+                    cupIndexValue = usCupArr.indexOf(selectedBraCup);
+                    let bandIndex = usBandArr.indexOf(selectedBraBand);
+                    bandValue = euBandArr[bandIndex];
+                } else {
+                    cupIndexValue = euCupArr.indexOf(selectedBraCup);
+                    bandValue = selectedBraBand;
+                }
+
+
+            } else if (activeGender === 'male') {
+
+                if (document.getElementById('male-flatter-p').classList.contains('active-p')) {
+                    maleBellyShape = 1;
+                } else if (document.getElementById('male-average-p').classList.contains('active-p')) {
+                    maleBellyShape = 2;
+                } else if (document.getElementById('male-rounder-p').classList.contains('active-p')) {
+                    maleBellyShape = 3;
+                } else {
+                    document.querySelectorAll('.male-belly-image').forEach(tag => {
+                        tag.classList.add('pic-error');
+                    });
+
+                    document.querySelectorAll('.male-belly-p').forEach(tag => {
+                        tag.classList.add('p-error');
+                    });
+                    toReturn = true;
+                }
+
+
+            }
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            let genderValue = activeGender === 'male' ? 0 : 1;
+            let measurementSystemValue = measurementSystem === 'metric' ? 0 : 1
+            let region = selectedBraType === null ? null : selectedBraType === 'us' ? 1 : 2;
+            let fullestPartValue = null;
+
+            switch (fullestPart) {
+                case 'chest':
+                    fullestPartValue = 3;
+                    break;
+                case 'shoulders':
+                    fullestPartValue = 4;
+                    break;
+                case 'waist':
+                    fullestPartValue = 2;
+                    break;
+                case 'hips':
+                    fullestPartValue = 5;
+                    break;
+                case 'symmetrical':
+                    fullestPartValue = 1;
+                    break;
+                default :
+                    fullestPartValue = null
+
+            }
+            if (toReturn) return;
+
+
+            let braRadioBtn = document.querySelector('input[name="brabra"]:checked').value;
+
+
+            if (braRadioBtn == '0') {
+                cupIndexValue = 999;
+                bandValue = 999;
+                region = 999;
+            }
+
+
+            let checkIFIsReadyForRec = () => {
+                setTimeout(() => {
+                    fetch(`<%=ENV['BACKEND_URL']%>/sdk/external_users/me/measurement?sdk_key=<%= ENV['SDK_KEY']%>&sdk_secret=<%=ENV['SDK_SECRET'] %>&external_id=${email}&measurement_type_name=body_type`)
+                        .then(response => response.json())
+                        .then(data => {
+
+                                if (parseInt(data.value) > 0) {
+
+                                    return;
+                                } else {
+                                    checkIFIsReadyForRec()
+                                }
+                            }
+                        )
+
+                }, 2000)
+            }
+
+
+            // Example POST method implementation:
+            async function postData(url = '', data = {}) {
+                // Default options are marked with *
+                const response = await fetch(url, {
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                    mode: 'cors', // no-cors, *cors, same-origin
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: 'same-origin', // include, *same-origin, omit
+                    headers: {
+                        'X-Admin-Api-Token': 'kofkof12',
+                        'Content-Type': 'application/json'
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    redirect: 'follow', // manual, *follow, error
+                    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                    body: JSON.stringify(data) // body data type must match "Content-Type" header
+                });
+                return response.json(); // parses JSON response into native JavaScript objects
+            }
+
+            document.querySelector('.form-section').classList.add('hide');
+            document.querySelector('.loeader-section').classList.remove('hide');
+
+            let data = {
+                sdk_key: "<%=ENV['SDK_KEY'] %>",
+                sdk_secret: "<%=ENV['SDK_SECRET'] %>",
+                measurement_system: measurementSystemValue,
+                gender: genderValue,
+            }
+
+
+            postData("<%=ENV['BACKEND_URL']%>/sdk/external_users/tesla", {
+                ...data,
+                create_if_not_found: true,
+                external_id: email.trim(),
+                measurements: [
+                    {
+                        measurement_type_name: 'height', value: height},
+                    {
+                    measurement_type_name: 'weight',
+                    value: weight
+                    },
+                    {measurement_type_name: 'bra_band', value: activeGender === 'male' ? 0 : bandValue === null ? 0 : bandValue}, {
+                        measurement_type_name: 'bra_cup',
+                        value: activeGender === 'male' ? 0 : cupIndexValue === null ? 0 : cupIndexValue
+                    }, {
+                        measurement_type_name: 'bra_unit',
+                        value: activeGender === 'male' ? 0 : region === null ? 0 : region
+                    }, {
+                        measurement_type_name: 'belly_shape',
+                        value: activeGender === 'female' ? femaleBellyShape : maleBellyShape
+                    },
+                    {measurement_type_name: 'hip_shape', value: activeGender === 'female' ? femaleHipShape : 0}
+                ]
+            }).then(data => {
+                window.location.href = `<%= ENV['TESLA_BACKEND_URL']%>products?hip_shape=${activeGender === 'female' ? femaleHipShape : 0}&belly_shape=${activeGender === 'female' ? femaleBellyShape : maleBellyShape}&gender=${data.gender}&external_id=${data.external_id}&fullest_part=${fullestPart}&original_weight=${originalWeight}&original_height=${originalHeight}&height=${height}&weight=${weight}&measurement_system=${measurementSystem}&bra_size=${selectedBraBand === null ? null : `${selectedBraBand}${selectedBraCup}`}`;
+            });
+        });
+
 
     }
 </script>
