@@ -54,12 +54,13 @@
             userResults.push({
                 size_chart_name: "<%=product[:title]%>",
                 size: "<%= product[:size] === nil ? '-' : product[:size]%>",
-                garment_fit: braRadioBtn
+                garment_fit: braRadioBtn,
+                product_id:  "<%=product[:product_id]%>"
             });
             <%}%>
             let feedback = document.getElementById("textareaID").value
 
-            let data = {user_results: userResults, external_id: "<%= @external_id %>", feedback: feedback}
+            let data = {user_results: userResults, external_id: "<%= @external_id %>", feedback: feedback, user_id: <%= @user_id %>}
             let userResultText = JSON.stringify(data);
 
             fetch('/user_profile', {
