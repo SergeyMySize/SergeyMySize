@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_122002) do
+ActiveRecord::Schema.define(version: 2021_11_18_152649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 2021_11_17_122002) do
   create_table "results", force: :cascade do |t|
     t.integer "user_profile_id"
     t.integer "product_id"
-    t.text "results"
-    t.text "feedback"
+    t.string "results"
+    t.string "feedback"
   end
 
   create_table "user_profiles", force: :cascade do |t|
