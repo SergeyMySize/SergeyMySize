@@ -19,7 +19,7 @@ class ProductController < ApplicationController
       @size_response.each { |sr|
         if sr['size_chart_code'] == product.size_chart_code
          category = Category.find_by(id: product.category_id);
-          @product_res << {title: product.title, logo: product.logo, size: sr['size'], product_id: product.id, category_name: category.name}
+          @product_res << {title: product.title, logo: product.logo, size: sr['size'], product_id: product.id, category_name: category&.name}
         end
       }
     end

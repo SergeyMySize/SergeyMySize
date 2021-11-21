@@ -18,17 +18,13 @@
 </div>
 
 
-<script>
-    window.onload = () => {
-        let contentSection = document.querySelector('.content-section');
-        let productStringTag = ``;
-        <% @product_res.each_with_index{|product,index| %>
-        productStringTag += `
+<% @product_res.each_with_index{|product,index| %>
+       
             <div class="content-section">
                 <div class="product-wrapper">
                     <img class="product-image" src="<%= product[:logo] %>"/>
                     <div class="title-and-size-wrapper">
-                        <p class="title-para"><%=product[:category_name] + "-" + product[:title] %></p>
+                        <p class="title-para"><%=product[:category_name] + " - " + product[:title] %></p>
                         <p class="title-para" style="color: #3d69e1;font-weight: bold; margin: 0"><%= product[:size] === nil ? '-' : product[:size] %></p>
                         <p class='how-did-your'>How did this garment fit?</p>
                         <div class='check-box-wrapper'>
@@ -41,11 +37,11 @@
                         </div>
                     </div>
                 </div>
-            </div>`
+            </div>
         <%}%>
 
-        contentSection.innerHTML = productStringTag;
-
+<script>
+    window.onload = () => {
 
         document.querySelector('.done-btn').addEventListener('click', () => {
             let userResults = [];
