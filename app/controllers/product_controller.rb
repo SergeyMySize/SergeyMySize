@@ -24,12 +24,12 @@ class ProductController < ApplicationController
       }
     end
     @product_res.each do |b|
-      category = Category.find_by(id: @product_res.category_id)
+      category = Category.find_by(id: b.category_id)
 
       pp "==========="
       pp category&.name
       pp "==========="
-      user_results.push("#{b[:title]} : #{b[:size]}")
+      user_results.push("#{category&.name} - #{b[:title]} : #{b[:size]}")
     end
 
 
