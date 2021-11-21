@@ -23,13 +23,8 @@ class ProductController < ApplicationController
         end
       }
     end
-    @product_res.each do |b|
-      category = Category.find_by(id: b.category_id)
-
-      pp "==========="
-      pp category&.name
-      pp "==========="
-      user_results.push("#{category&.name} - #{b[:title]} : #{b[:size]}")
+    @product_res.each do |b|      
+      user_results.push("#{b.category_name} - #{b[:title]} : #{b[:size]}")
     end
 
 
