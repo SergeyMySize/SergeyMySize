@@ -24,7 +24,7 @@ class ProductController < ApplicationController
       }
     end
     @product_res.each do |b|      
-      user_results.push("#{b.category_name} - #{b[:title]} : #{b[:size]}")
+      user_results.push("#{b[:category_name]} - #{b[:title]} : #{b[:size]}")
     end
 
 
