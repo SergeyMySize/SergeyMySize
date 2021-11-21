@@ -8,17 +8,7 @@
       <div class="header-wrapper">
         <h1 class="uniform-header">Hey, your uniform sizes are:</h1>
       </div>
-      <div class="content-section"></div>
-      <textarea id="textareaID" placeholder="Other feedback…"></textarea>
-      <div class="done-btn">SUBMIT FORM</div>
-    </div>
-  </div>
-  <%= image_tag('tesla-bg.png') %>
-
-</div>
-
-
-<% @product_res.each_with_index{|product,index| %>
+      <% @product_res.each_with_index{|product,index| %>
        
             <div class="content-section">
                 <div class="product-wrapper">
@@ -39,6 +29,16 @@
                 </div>
             </div>
         <%}%>
+      <textarea id="textareaID" placeholder="Other feedback…"></textarea>
+      <div class="done-btn">SUBMIT FORM</div>
+    </div>
+  </div>
+  <%= image_tag('tesla-bg.png') %>
+
+</div>
+
+
+
 
 <script>
     window.onload = () => {
