@@ -8,27 +8,13 @@
       <div class="header-wrapper">
         <h1 class="uniform-header">Hey, your uniform sizes are:</h1>
       </div>
-      <div class="content-section"></div>
-      <textarea id="textareaID" placeholder="Other feedback…"></textarea>
-      <div class="done-btn">SUBMIT FORM</div>
-    </div>
-  </div>
-  <%= image_tag('tesla-bg.png') %>
-
-</div>
-
-
-<script>
-    window.onload = () => {
-        let contentSection = document.querySelector('.content-section');
-        let productStringTag = ``;
-        <% @product_res.each_with_index{|product,index| %>
-        productStringTag += `
+      <% @product_res.each_with_index{|product,index| %>
+       
             <div class="content-section">
                 <div class="product-wrapper">
                     <img class="product-image" src="<%= product[:logo] %>"/>
                     <div class="title-and-size-wrapper">
-                        <p class="title-para"><%=product[:title] %></p>
+                        <p class="title-para"><%=product[:category_name] + " - " + product[:title] %></p>
                         <p class="title-para" style="color: #3d69e1;font-weight: bold; margin: 0"><%= product[:size] === nil ? '-' : product[:size] %></p>
                         <p class='how-did-your'>How did this garment fit?</p>
                         <div class='check-box-wrapper'>
@@ -41,11 +27,21 @@
                         </div>
                     </div>
                 </div>
-            </div>`
+            </div>
         <%}%>
+      <textarea id="textareaID" placeholder="Other feedback…"></textarea>
+      <div class="done-btn">SUBMIT FORM</div>
+    </div>
+  </div>
+  <%= image_tag('tesla-bg.png') %>
 
-        contentSection.innerHTML = productStringTag;
+</div>
 
+
+
+
+<script>
+    window.onload = () => {
 
         document.querySelector('.done-btn').addEventListener('click', () => {
             let userResults = [];
@@ -54,12 +50,13 @@
             userResults.push({
                 size_chart_name: "<%=product[:title]%>",
                 size: "<%= product[:size] === nil ? '-' : product[:size]%>",
-                garment_fit: braRadioBtn
+                garment_fit: braRadioBtn,
+                product_id:  "<%=product[:product_id]%>"
             });
             <%}%>
             let feedback = document.getElementById("textareaID").value
 
-            let data = {user_results: userResults, external_id: "<%= @external_id %>", feedback: feedback}
+            let data = {user_results: userResults, external_id: "<%= @external_id %>", feedback: feedback, user_id: <%= @user_id %>}
             let userResultText = JSON.stringify(data);
 
             fetch('/user_profile', {
