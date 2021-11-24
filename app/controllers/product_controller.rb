@@ -1,7 +1,7 @@
 require 'httparty'
 
 class ProductController < ApplicationController
-  layout "tesla"
+  # layout "tesla"
   def index
     user_results  = []
     user = UserProfile.create(email: params[:external_id]);
