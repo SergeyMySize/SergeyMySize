@@ -10,10 +10,11 @@ class ProductController < ApplicationController
     @product_res = []
     @user_id  = user.id
     size_chart_codes = @products.pluck(:size_chart_code).uniq.join(',')
-    pp "#{ENV['BACKEND_URL']}/sdk/external_users/me/garment_sizes?size_chart_codes_csv=#{size_chart_codes}&external_id=#{params[:external_id]}&sdk_key=#{ENV['SDK_KEY']}&sdk_secret=#{ENV['SDK_SECRET']}"
     @size_response = HTTParty.get("#{ENV['BACKEND_URL']}/sdk/external_users/me/garment_sizes?size_chart_codes_csv=#{size_chart_codes}&external_id=#{params[:external_id]}&sdk_key=#{ENV['SDK_KEY']}&sdk_secret=#{ENV['SDK_SECRET']}")
   
+
     arr = []
+
     @products.each_with_index do |product, index|
       category_id = product[:category_id]
       arr.push({
@@ -30,8 +31,8 @@ class ProductController < ApplicationController
 
    @arr_res = []
    arr.each do |key,value|
-    category = Category.find_by(id: key).name;
-    @arr_res << {category: category, products: value}
+    category = Category.find_by(id: key)
+    @arr_res << {category: category.name, products: value,index: category.index}
    end
 
 
@@ -55,13 +56,10 @@ class ProductController < ApplicationController
 
     user.update(user_results: user_results.join("\n"))
     @product_res.each do |prod_res|
-      pp prod_res
       Result.create(user_profile_id: user.id, product_id: prod_res[:product_id], results: prod_res[:size])
     end
 
+    @arr_res = @arr_res.sort_by{|x|x[:index]}    
 
-    pp "]]]]]]]]]]"
-    pp @arr_res
-    pp "]]]]]]]]]]"
   end
 end

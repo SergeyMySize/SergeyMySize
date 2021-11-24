@@ -719,29 +719,45 @@ input[type="radio"]{
 
 
 .category-name {
-  background: #3d69e1;
-  color: white;
- 
+   font-size: 16px;
+  font-weight: bold;
 
 }
 .category-row {
   display: flex;
   margin-bottom: 4px;
-  
-
+  background: #f5f5f5;
+  width: fit-content;
+  border-radius:  12px;
+  border: solid 1px #bfbfbf;
+  overflow: auto;
 
 }
+
+
 .table{
-font-family: Gotham;
+    font-family: "Gotham";
+    color: black;
 }
 
 th {
   font-weight: 300;
 }
 .product-item > .title {
-  background: #3d69e1;
-  color: white;
+
   padding: 5px 0;
+  border-bottom:  1px solid #bfbfbf;
+   font-size: 15px;
+  font-weight: 500;
+  min-height: 37px;
+  display: flex;
+  justify-content: center;
+  min-height: 37px;
+  align-items: center;
+
+ 
+  color: #5c5d61;
+
 
 }
 
@@ -749,22 +765,39 @@ th {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #5c5d61;
   
 }
 
+tr:before {
+  border-radius: 10px;
+  background: red;
+  width: 100%;
+  height: 100%;
+}
 .product-item {
   
   width: 100px;
 
   padding: 0;
-  border: 1px solid black;
-  margin-left: -1px;
+  text-align: center;
+  border-right:  1px solid #bfbfbf;
+ 
   
 }
 
-.product-item:nth-child(2n + 1) > .size {
-  background: #dbdbdb;
+.category-row>div:last-child {
+  border-right: none;
+
 }
+
+.size {
+  background: white;
+  color: #3d69e1;
+   font-size: 16px;
+  font-weight: bold;
+}
+
 
 
 @media only screen and (max-width:480px){

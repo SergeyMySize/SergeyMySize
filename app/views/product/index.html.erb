@@ -9,23 +9,21 @@
         <h1 class="uniform-header">Hey, your uniform sizes are:</h1>
       </div>
 
-      <table class="table">
+      <div class="table">
         <% @arr_res.each_with_index{|x,index| %>
-            <tr class="category-row">
-              <th class="product-item category-name"><%=x[:category]%></th>
+            <div class="category-row">
+              <div class="product-item category-name"><%=x[:category]%></div>
                 <%x[:products].each do |product| %>
-                  <th class="product-item">
+                  <div class="product-item">
                       <div class="title"><%= product[:title]%></div>
                       <div class="size"><%= product[:size]%></div>
-                    
-                      
-                   </th>
+                   </div>
                 <%end%>
-            </tr>
+            </div>
         <%} %>
-      </table>
+      </div>
 
-      <textarea id="textareaID" placeholder="Other feedback…"></textarea>
+      <textarea id="textareaID" placeholder="Feedback…"></textarea>
       <div class="done-btn">SUBMIT FORM</div>
     </div>
   </div>
