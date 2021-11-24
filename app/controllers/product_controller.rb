@@ -9,9 +9,10 @@ class ProductController < ApplicationController
     @products = Product.where(gender: [params[:gender],'unisex']).order(:index)
     @product_res = []
     @user_id  = user.id
-    size_chart_codes = @products.pluck(:size_chart_code).uniq.join(',')
+    size_chart_codes = @products.pluck(:size_chart_code).join(',')
     @size_response = HTTParty.get("#{ENV['BACKEND_URL']}/sdk/external_users/me/garment_sizes?size_chart_codes_csv=#{size_chart_codes}&external_id=#{params[:external_id]}&sdk_key=#{ENV['SDK_KEY']}&sdk_secret=#{ENV['SDK_SECRET']}")
   
+
 
     arr = []
 
