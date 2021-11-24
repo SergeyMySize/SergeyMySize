@@ -5,6 +5,7 @@ ActiveAdmin.register Category do
     selectable_column
     id_column
     column :name
+    column :index
     actions
   end
 
@@ -13,6 +14,7 @@ ActiveAdmin.register Category do
   form do |f|
     f.inputs do
       f.input :name
+      f.input :index
     end
     f.actions
   end
