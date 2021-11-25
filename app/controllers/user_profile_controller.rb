@@ -3,7 +3,7 @@ class UserProfileController < BasicAuthController
   layout "tesla"
 
   def index
-    
+    session[:data_stored ]  = nil
   end
 
   def update_user_results

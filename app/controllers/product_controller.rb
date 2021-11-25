@@ -3,13 +3,18 @@ require 'httparty'
 class ProductController < ApplicationController
   # layout "tesla"
   def index
+    is_data_stored  = session[:data_stored ]  != nil
     user_results  = []
-    user = UserProfile.create(email: params[:external_id]);
-    user.update(gender: params[:gender], height: params[:height], weight: params[:weight],measurement_system: params[:measurement_system], bra_size: params[:bra_size], original_weight: params[:original_weight],belly_shape: params[:belly_shape],hip_shape: params[:hip_shape], original_height: params[:original_height])
+    if !is_data_stored
+      user = UserProfile.create(email: params[:external_id])    
+      user.update(gender: params[:gender], height: params[:height], weight: params[:weight],measurement_system: params[:measurement_system], bra_size: params[:bra_size], original_weight: params[:original_weight],belly_shape: params[:belly_shape],hip_shape: params[:hip_shape], original_height: params[:original_height])
+    else
+      user =UserProfile.find(session[:data_stored])
+    end
     @products = Product.where(gender: [params[:gender],'unisex']).order(:index)
     @product_res = []
     @user_id  = user.id
-    size_chart_codes = @products.pluck(:size_chart_code).join(',')
+    size_chart_codes = @products.pluck(:size_chart_code).uniq.join(',')
     @size_response = HTTParty.get("#{ENV['BACKEND_URL']}/sdk/external_users/me/garment_sizes?size_chart_codes_csv=#{size_chart_codes}&external_id=#{params[:external_id]}&sdk_key=#{ENV['SDK_KEY']}&sdk_secret=#{ENV['SDK_SECRET']}")
   
 
@@ -18,9 +23,10 @@ class ProductController < ApplicationController
 
     @products.each_with_index do |product, index|
       category_id = product[:category_id]
+      size_response = @size_response.select{|x| x["size_chart_code"]==product.size_chart_code }.first
       arr.push({
         product_id: product[:id], 
-        size: @size_response[index]["size"],
+        size: size_response && size_response["size"],
         category_id: product[:category_id],
         title: product[:title],
         logo: product[:logo]
@@ -56,11 +62,14 @@ class ProductController < ApplicationController
 
 
     user.update(user_results: user_results.join("\n"))
-    @product_res.each do |prod_res|
-      Result.create(user_profile_id: user.id, product_id: prod_res[:product_id], results: prod_res[:size])
+
+    if !is_data_stored
+      @product_res.each do |prod_res|
+        Result.create(user_profile_id: user.id, product_id: prod_res[:product_id], results: prod_res[:size])
+      end
     end
 
     @arr_res = @arr_res.sort_by{|x|x[:index]}    
-
+    session[:data_stored ]  = user.id
   end
 end
